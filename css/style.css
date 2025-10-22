@@ -1,114 +1,483 @@
-
-/* style.css - dark theme + small animations */
+/* style.css - dark theme + Glassmorphism Layout + Animated Blobs Background + Stars */
 :root{
   --bg:#0f1113;
-  --card:#151718;
-  --muted:#9aa0a6;
-  --glass: rgba(255,255,255,0.03);
-  --accent-khoa: #067bff;
-  --accent-huy: #9926c8;
-  --accent-tram: #ff8c00;
+  /* Card background hơi xanh lá cây đậm giống ảnh mẫu */
+  --card: rgba(15, 25, 20, 0.65);
+  --muted:#b0b8c0;
+  --glass: rgba(255,255,255,0.05);
+  /* Accent màu xanh lá cây nhạt hơn */
+  --accent-color: #28a745; /* Bootstrap success color */
+  --progress-bg: rgba(255, 255, 255, 0.1);
 }
 *{box-sizing:border-box}
+
+/* --- BODY CHO LAYOUT MỚI & NỀN ĐỘNG --- */
 body{
-  background: linear-gradient(180deg,var(--bg),#070708 140%);
   color:#e6eef3;
   font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   -webkit-font-smoothing:antialiased;
   -moz-osx-font-smoothing:grayscale;
-}
-h2{color :green}
+  overflow-x: hidden;
+  overflow-y: auto;
+  position: relative;
 
-.container{max-width:1100px;margin:0 auto;padding:24px}
-.banner{
-  background: url('../img/banner.jpg') center/cover no-repeat;
-  border-radius:10px;
-  padding:36px;
-  box-shadow: 0 6px 20px rgba(0,0,0,0.6);
-  margin-bottom:18px;
-  position:relative;
-  overflow:hidden;
-}
-.banner::after{
-  content:"";
-  position:absolute; left:0; right:0; bottom:0; top:0;
-  background: linear-gradient(180deg, rgba(0,0,0,0.2), rgba(0,0,0,0.6));
-  mix-blend-mode:multiply;
-}
-.navbar-dark .navbar-brand{color:#fff;font-weight:600}
-.navbar-dark .nav-link{color:var(--muted)}
-.navbar-dark .nav-link:hover{color:#fff}
+  /* NỀN ĐỘNG MỚI: GRADIENT CƠ BẢN */
+  background: linear-gradient(180deg, #1A1A2E, #0F0E20 100%);
+  background-attachment: fixed;
 
-/* cards */
-.card{
-  background:var(--card);
-  border:1px solid rgba(255,255,255,0.03);
-  border-radius:12px;
-  padding:18px;
+  /* CẤU TRÚC LAYOUT MỚI */
+  display: flex;
+  min-height: 100vh;
+}
+
+/* --- KEYFRAMES CHO NỀN ĐỘNG BLOB VÀ SAO --- */
+
+/* Keyframe cho hiệu ứng chuyển màu gradient (cho ngôi sao cầu vồng) */
+@keyframes gradient-shift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Keyframes cho blobs */
+@keyframes blob-animation-1 {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+    border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+  }
+  25% {
+    transform: translate(20vw, 15vh) scale(1.1);
+    border-radius: 50% 50% 40% 60% / 70% 40% 60% 30%;
+  }
+  50% {
+    transform: translate(-10vw, 20vh) scale(1.2);
+    border-radius: 70% 30% 50% 50% / 30% 60% 40% 70%;
+  }
+  75% {
+    transform: translate(15vw, -10vh) scale(0.9);
+    border-radius: 40% 60% 70% 30% / 50% 70% 30% 50%;
+  }
+}
+
+@keyframes blob-animation-2 {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+    border-radius: 70% 30% 60% 40% / 40% 70% 30% 60%;
+  }
+  25% {
+    transform: translate(-10vw, -10vh) scale(1.1);
+    border-radius: 60% 40% 70% 30% / 50% 60% 40% 50%;
+  }
+  50% {
+    transform: translate(15vw, 10vh) scale(0.9);
+    border-radius: 30% 70% 40% 60% / 70% 30% 60% 40%;
+  }
+  75% {
+    transform: translate(-5vw, 25vh) scale(1.2);
+    border-radius: 50% 50% 60% 40% / 60% 40% 50% 50%;
+  }
+}
+
+/* Keyframe cho hiệu ứng nhấp nháy của ngôi sao trắng */
+@keyframes star-flicker {
+    0%, 100% { opacity: 0.4; transform: scale(0.8); }
+    50% { opacity: 1; transform: scale(1.1); }
+}
+
+/* Keyframe cho hiệu ứng nhấp nháy CẦU VỒNG (THAY ĐỔI KÍCH THƯỚC) */
+@keyframes rainbow-flicker {
+    0%, 100% {
+        transform: scale(0.9) rotate(0deg);
+        opacity: 0.8;
+        filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.3));
+    }
+    50% {
+        transform: scale(1.1) rotate(10deg);
+        opacity: 1;
+        filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.7));
+    }
+}
+
+/* Keyframe cho nội dung fade-in */
+@keyframes fadeIn{
+    from{opacity:0; transform: translateY(10px)}
+    to{opacity:1; transform:none}
+}
+
+/* --- CÁC LỚP PHỦ NỀN ĐỘNG (BLOBS & SAO) --- */
+body::before,
+body::after {
+  content: "";
+  position: fixed;
+  top: 0; left: 0;
+  width: 50vw;
+  height: 50vw;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.6;
+  z-index: -2; /* Nằm dưới cùng */
+  pointer-events: none;
+}
+
+/* Blob 1 */
+body::before {
+  background: radial-gradient(circle, #ff69b4 0%, rgba(255, 105, 180, 0) 70%); /* Hồng */
+  top: -10vw;
+  left: -10vw;
+  animation: blob-animation-1 25s infinite ease-in-out alternate;
+}
+
+/* Blob 2 */
+body::after {
+  background: radial-gradient(circle, #00c0ff 0%, rgba(0, 192, 255, 0) 70%); /* Xanh Cyan */
+  bottom: -10vw;
+  right: -10vw;
+  animation: blob-animation-2 30s infinite ease-in-out alternate-reverse;
+}
+
+/* Lớp phủ cho các ngôi sao trắng */
+.star-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1; /* Nằm trên blob, dưới nội dung */
+  pointer-events: none;
+
+  box-shadow:
+    10% 5% 2px 2px rgba(255, 255, 255, 0.7),
+    25% 12% 1px 1px rgba(255, 255, 255, 0.5),
+    40% 90% 2px 2px rgba(255, 255, 255, 0.6),
+    85% 15% 1px 1px rgba(255, 255, 255, 0.4),
+    90% 50% 2px 2px rgba(255, 255, 255, 0.8),
+    78% 80% 1px 1px rgba(255, 255, 255, 0.5)
+    ;
+    animation: star-flicker 4s infinite alternate ease-in-out;
+}
+
+/* --- CÁC NGÔI SAO CẦU VỒNG --- */
+.rainbow-star {
+    position: fixed;
+    width: 30px; /* Kích thước cơ bản */
+    height: 30px;
+    pointer-events: none;
+    z-index: -1; /* Nằm trên blob, dưới nội dung */
+
+    /* 1. MÀU CẦU VỒNG (Di chuyển) */
+    background: linear-gradient(-45deg,
+        #ff0000, #ff8c00, #ffff00, #00ff00,
+        #00ffff, #0000ff, #9926c8, #ff0000);
+    background-size: 400% 400%;
+
+    /* 2. HÌNH DẠNG NGÔI SAO (Đặc) */
+    clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+
+    /* 3. ANIMATION (Nhấp nháy + Đổi màu) */
+    animation:
+        rainbow-flicker 4s infinite ease-in-out alternate,
+        gradient-shift 8s infinite linear;
+}
+
+/* Định vị và kích thước/tốc độ từng ngôi sao cầu vồng */
+.rainbow-star.star-1 { top: 15%; left: 8%; width: 25px; height: 25px; animation-delay: 0s, 0s; }
+.rainbow-star.star-2 { top: 35%; left: 15%; width: 20px; height: 20px; animation-delay: 1s, 0.5s; }
+.rainbow-star.star-3 { top: 75%; left: 10%; width: 28px; height: 28px; animation-delay: 2s, 1s; }
+.rainbow-star.star-4 { top: 20%; left: 40%; width: 22px; height: 22px; animation-delay: 3s, 0.2s; }
+.rainbow-star.star-5 { bottom: 10%; left: 30%; width: 30px; height: 30px; animation-delay: 4s, 0.7s; }
+.rainbow-star.star-6 { top: 55%; right: 15%; width: 25px; height: 25px; animation-delay: 5s, 0.3s; }
+.rainbow-star.star-7 { top: 5%; right: 5%; width: 22px; height: 22px; animation-delay: 6s, 0.8s; }
+.rainbow-star.star-8 { bottom: 25%; right: 8%; width: 28px; height: 28px; animation-delay: 7s, 0.1s; }
+
+
+/* 1. THANH ĐIỀU HƯỚNG BÊN TRÁI (SIDEBAR) (Giữ nguyên) */
+.sidebar {
+  width: 100px;
+  flex-shrink: 0;
+  height: 100vh;
+  position: sticky;
+  top: 0;
+  padding: 24px 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  background: rgba(10, 15, 12, 0.6);
+  backdrop-filter: blur(12px);
+  border-right: 1px solid rgba(40, 167, 69, 0.1);
+  box-shadow: 3px 0 20px rgba(0,0,0,0.3);
+}
+.sidebar .nav-link {
+  color: var(--muted);
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 13px;
+  padding: 12px 8px;
+  border-radius: 8px;
+  text-align: center;
+  width: 100%;
+  transition: all 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+.sidebar .nav-link .icon-placeholder {
+    font-size: 20px;
+    display: block;
+    margin-bottom: 4px;
+}
+.sidebar .nav-link .link-text {
+    font-size: 11px;
+    display: block;
+}
+.sidebar .nav-link:hover,
+.sidebar .nav-link.active {
+  background: var(--accent-color);
+  color: #fff;
+}
+
+/* 2. KHUNG NỘI DUNG CHÍNH - Cập nhật */
+.content-area {
+  padding: 30px;
+  max-width: 1300px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: max(30px, calc(100px + 30px - (100vw - 1300px)/2));
+  flex-grow: 1;
+}
+
+/* --- STYLE THẺ CARD (GLASSMORPHISM) - Cập nhật --- */
+.card {
+  background: var(--card);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(40, 167, 69, 0.15);
+  border-radius: 12px;
+  padding: 25px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.25);
   transition: transform .28s ease, box-shadow .28s ease;
-  box-shadow: 0 6px 18px rgba(2,6,23,0.6);
 }
-.card:hover{ transform: translateY(-6px); box-shadow: 0 18px 40px rgba(2,6,23,0.75);}
+.card:hover{
+  transform: translateY(-5px) scale(1.03) !important;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+}
 
-/* small animations */
-.fade-in{ animation: fadeIn .8s ease both; }
-@keyframes fadeIn{ from{opacity:0; transform: translateY(6px)} to{opacity:1; transform:none} }
+/* Profile Photos */
+.profile-photos {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+}
+.profile-photos img {
+    width: 100%;
+    border-radius: 8px;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    border: 1px solid rgba(255,255,255,0.1);
+}
 
-/* profile header */
-.profile-header{ display:flex; gap:18px; align-items:center}
-.avatar{ width:120px; height:120px; border-radius:14px; overflow:hidden; flex:0 0 120px; border:4px solid rgba(255,255,255,0.04)}
-.profile-meta h2{ margin:0 0 6px 0; font-size:22px}
-.profile-meta p{ margin:0; color:var(--muted)}
+/* Contact Info Items */
+.contact-info-item {
+    font-size: 14px;
+    color: var(--muted);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.contact-info-item .icon-placeholder {
+    font-size: 16px;
+    color: var(--accent-color);
+}
+
+
+/* --- CÁC STYLE KHÁC --- */
+
+/* Áp dụng fade-in */
+.fade-in { animation: fadeIn 1s ease both; }
+.sidebar.fade-in { animation-delay: 0.1s; }
+.content-area.fade-in { animation-delay: 0.3s; }
 
 /* sections */
-.section{ margin-top:14px; }
-.section h4{ margin-bottom:12px; font-size:16px;color:#fff}
-.section p{color :lightseagreen}
-.badge-accent{ padding:6px 10px; border-radius:8px; color:#fff; font-weight:600; font-size:13px; display:inline-block; }
+.section{
+  margin-top: 0;
+  opacity: 1;
+  animation: fadeIn 0.8s ease both;
+}
 
-/* BR_GK specific styling */
-.br-gk .card{ border-left:4px solid var(--accent-khoa); background: linear-gradient(180deg, rgba(6,123,255,0.04), transparent); }
-.br-gk h4{ color: var(--accent-khoa); }
-.br-gk p{ color:var(--muted); }
+.section h4, .section h5 {
+    margin-bottom: 15px;
+    font-size: 18px;
+    color:#e0e8ef;
+    font-weight: 600;
+    letter-spacing: 0.2px;
+    border-left: 4px solid var(--accent-color);
+    padding-left: 10px;
+}
+.section h5 {
+    font-size: 18px; /* Giữ kích thước H5 giống H4 */
+    color: var(--muted);
+    border-left-width: 3px;
+    margin-top: 20px;
+}
 
-/* accents for each member */
-.khoa .badge-accent{ background:var(--accent-khoa)}
-.huy .badge-accent{ background:var(--accent-huy)}
-.tram .badge-accent{ background:var(--accent-tram)}
+.section p{
+    color : var(--muted);
+    margin-bottom: 12px;
+    font-size: 15px;
+    line-height: 1.7;
+}
+.section hr {
+    border-color: rgba(40, 167, 69, 0.2);
+    margin: 20px 0;
+}
+.section ul {
+    list-style: none;
+    padding-left: 0;
+    color: var(--muted);
+}
+.section ul li {
+    margin-bottom: 8px;
+    font-size: 15px;
+    padding-left: 20px;
+    position: relative;
+}
+.section ul li::before {
+    content: '▶';
+    position: absolute;
+    left: 0;
+    color: var(--accent-color);
+    font-size: 12px;
+    top: 3px;
+}
 
-/* lists */
-.skills{ display:flex; gap:8px; flex-wrap:wrap }
-.skills .skill{ background:var(--glass); padding:6px 10px; border-radius:8px; color:var(--muted); font-weight:600; font-size:13px}
-.skill:hover{ transform: translateY(-6px); box-shadow: 0 18px 40px rgba(2,6,23,0.75);}
+
+
+/* Skills Section - Progress Bars - Cập nhật */
+.skill-item {
+    margin-bottom: 18px; /* Tăng khoảng cách nếu cần */
+    display: flex; /* BẬT FLEXBOX */
+    align-items: center; /* Căn giữa các item theo chiều dọc */
+    gap: 15px; /* Khoảng cách giữa tên, thanh progress, và icon */
+}
+
+.skill-item span {
+    display: block;
+    min-width: 80px; /* Đảm bảo tên không bị quá hẹp */
+    flex-shrink: 0; /* Ngăn tên kỹ năng bị co lại */
+    margin-bottom: 0; /* Bỏ margin bottom mặc định */
+    font-size: 16px; /* Giữ nguyên kích thước */
+    font-weight: 500;
+    color: #cdd6de;
+    text-align: left; /* Căn trái tên kỹ năng */
+}
+
+.progress {
+    height: 30px; /* Giữ nguyên chiều cao */
+    background-color: var(--progress-bg);
+    border-radius: 20px; /* Giữ nguyên bo tròn */
+    overflow: hidden;
+    flex-grow: 1; /* CHO PHÉP THANH PROGRESS GIÃN RA */
+}
+
+.progress-bar {
+    background-color: var(--accent-color);
+    font-size: 15px; /* Giữ nguyên kích thước chữ % */
+    line-height: 30px; /* Chỉnh line-height bằng height của progress */
+    text-align: center;
+    color: #fff;
+    font-weight: 600;
+}
+
+/* Style cho icon kỹ năng - Thêm mới */
+.skill-icon {
+    width: 24px; /* Kích thước icon */
+    height: 24px;
+    object-fit: contain; /* Đảm bảo logo không bị méo */
+    flex-shrink: 0; /* Ngăn icon bị co lại */
+}
+
+
 /* contact links */
-.contact a{ color:var(--muted); text-decoration:none; display:inline-block; margin-right:8px}
-.contact a:hover{ color:#fff; text-decoration:underline}
+.contact a{ color:var(--accent-color); text-decoration:none; font-weight: 500;}
+.contact a:hover{ color: #52c76e; text-decoration: underline;}
 
 /* responsive */
-@media (max-width:720px){
-  .profile-header{ flex-direction:row; gap:12px }
-  .avatar{ width:92px; height:92px; flex:0 0 92px }
-}
-.site-footer {
-  background-color: #222;
-  color: #f1f1f1;
-  text-align: center;
-  padding: 15px 0;
-  font-size: 14px;
-  font-family: "Segoe UI", Arial, sans-serif;
-  letter-spacing: 0.5px;
-  border-top: 2px solid #ff9900;
+@media (max-width: 992px){
+  body {
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+  .sidebar {
+    width: 100%;
+    height: auto;
+    position: static;
+    flex-direction: row;
+    justify-content: center;
+    overflow-x: auto;
+    padding: 10px 15px;
+    gap: 10px;
+  }
+  .sidebar .nav-link {
+    width: auto;
+    padding: 8px 10px;
+  }
+   .sidebar .nav-link .icon-placeholder {
+     font-size: 18px;
+     margin-bottom: 2px;
+   }
+   .sidebar .nav-link .link-text {
+     font-size: 10px;
+   }
+  .content-area {
+    margin-left: auto;
+    margin-right: auto;
+    padding: 24px;
+    max-width: 95%;
+    padding-left: 24px;
+  }
 }
 
+@media (max-width: 768px) {
+  /* .content-grid { grid-template-columns: 1fr; } */ /* Bootstrap đã xử lý */
+  .content-area {
+     max-width: 100%;
+     padding: 16px;
+     padding-left: 16px;
+  }
+  .section h4, .section h5 { font-size: 16px; padding-left: 8px; }
+  .section p, .section ul li { font-size: 14px; }
+  .card { padding: 20px; }
+
+  /* Điều chỉnh layout skill trên mobile nếu cần */
+  .skill-item {
+      gap: 10px;
+  }
+  .skill-item span {
+      min-width: 60px;
+      font-size: 14px;
+  }
+  .progress {
+      height: 25px;
+      border-radius: 15px;
+  }
+  .progress-bar {
+      font-size: 12px;
+      line-height: 25px;
+  }
+  .skill-icon {
+      width: 20px;
+      height: 20px;
+  }
+}
+
+.site-footer {
+  background-color: transparent;
+  color: var(--muted);
+  text-align: center;
+  padding: 20px 0;
+  font-size: 13px;
+  border-top: none;
+}
 .site-footer p {
   margin: 0;
-}
-
-.site-footer a {
-  color: #ff9900;
-  text-decoration: none;
-}
-
-.site-footer a:hover {
-  text-decoration: underline;
 }

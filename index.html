@@ -6,90 +6,244 @@
   <title>Nguyễn Quốc Thắng - portfolio</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
+
 </head>
 <body class="thang">
-<nav class="navbar navbar-dark" style="background:transparent;">
-  <div class="container">
-    <a class="navbar-brand" href="https://dinhphucaz2005.github.io/Group/">Nhóm 1 - Web nhóm</a>
-    <div>
-      <a class="nav-link d-inline" href="https://dinhphucaz2005.github.io/Group/" style="color:var(--muted)">Trang nhóm</a>
-    </div>
-  </div>
+
+<div class="star-overlay"></div>
+<div class="rainbow-star star-1"></div>
+<div class="rainbow-star star-2"></div>
+<div class="rainbow-star star-3"></div>
+<div class="rainbow-star star-4"></div>
+<div class="rainbow-star star-5"></div>
+<div class="rainbow-star star-6"></div>
+<div class="rainbow-star star-7"></div>
+<div class="rainbow-star star-8"></div>
+
+<nav class="sidebar fade-in">
+  <a href="#info" class="nav-link active" title="Thông tin"><span class="icon-placeholder">👤</span> <span class="link-text">Thông tin</span></a>
+  <a href="#experience" class="nav-link" title="Kinh nghiệm"><span class="icon-placeholder">💼</span> <span class="link-text">Kinh nghiệm</span></a>
+  <a href="#skills" class="nav-link" title="Kỹ năng"><span class="icon-placeholder">🛠️</span> <span class="link-text">Kỹ năng</span></a>
+  <a href="#certs" class="nav-link" title="Chứng chỉ"><span class="icon-placeholder">⭐</span> <span class="link-text">Chứng chỉ</span></a>
+  <a href="#contact" class="nav-link" title="Liên hệ"><span class="icon-placeholder">✉️</span> <span class="link-text">Liên hệ</span></a>
 </nav>
 
-<main class="container fade-in">
-  <div class="card" style="margin-top:16px">
-  <div class="profile-header">
-    <img id="avatar" src="img/1.jpg" class="avatar" alt="thang">
-    <div class="profile-meta">
-      <h2>Nguyễn Quốc Thắng <span class="badge-accent"></span></h2>
+<main class="content-area fade-in">
+
+  <div class="row mb-4" id="info">
+    <div class="col-lg-4 mb-4 mb-lg-0">
+      <div class="card p-3 h-100 section" style="animation-delay: 0.4s;" data-aos="fade-up">
+        <h4>Profile</h4>
+        <div class="profile-photos mb-3">
+          <img src="img/1.jpg" alt="Photo 1" class="img-fluid">
+        </div>
+        <h5>Contact Info</h5>
+        <p class="contact-info-item mb-1"><span class="icon-placeholder">📧</span> Email: thangnq5089@ut.edu.vn</p>
+        <p class="contact-info-item mb-1"><span class="icon-placeholder">📞</span> Phone: 0123 456 789</p>
+        <p class="contact-info-item mb-0"><span class="icon-placeholder">📍</span> Địa chỉ: TP. Hồ Chí Minh</p>
+        
+        <p class="contact-info-item mb-0"><span class="icon-placeholder">FB :</span> 
+          <a href="https://www.facebook.com/share/1BoyPoMV5h/" target="_blank">Nguyễn Quốc Thắng</a>
+        </p>
+     
+        <p class="contact-info-item mb-0"><span class="icon-placeholder">GIT :</span> 
+          <a href="https://github.com/Thang7749" target="_blank">GIT</a>
+        </p>
+      </div>
+    </div>
+
+    <div class="col-lg-8">
+      <div class="card p-4 h-100 section" style="animation-delay: 0.5s;" data-aos="fade-up" data-aos-delay="100">
+        <h4>Personal Information</h4>
+        <p>Chào các bạn mình là Thắng, một sinh viên có đam mê xây dựng các ứng dụng. Mình đang học tiếp về các ngôn ngữ như Java, C++, Sql và các thuật toán cũng như giải thuật để trở thành phiên bản tốt hơn ngày hôm qua.</p>
+        <hr>
+        <h5>Career Objective</h5>
+        <p>Trở thành lập trình viên FullStack và Game chuyên nghiệp, tập trung vào xây dựng logic hệ thống, tối ưu hiệu năng và phát triển các tính năng game hấp dẫn.</p>
+        <hr>
+        <h5>Hobbies</h5>
+        <p>Game, Gym, Thiền, Nghiên cứu thuật toán, Nuôi mèo</p>
+      </div>
+    </div>
+  </div>
+  
+  <div class="row mb-4">
+    <div class="col-12">
+      <div class="card p-4 section" id="experience" data-aos="fade-up">
+        <h4>Kinh nghiệm làm việc</h4>
+        <p>Chưa có</p>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="row mb-4">
+    <div class="col-lg-6 mb-4 mb-lg-0">
+      <div class="card p-4 section" id="skills" data-aos="fade-up">
+        <h4>Languages & Skills</h4>
+        
+        <h5>Languages</h5>
+        <div class="skill-item">
+          <span>C++</span>
+          <div class="progress" role="progressbar" aria-label="C++ skill" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100">
+            <div class="progress-bar" style="width: 40%">40%</div>
+          </div>
+        </div>
+        
+        <div class="skill-item">
+          <span>Java</span>
+          <div class="progress" role="progressbar" aria-label="Java skill" aria-valuenow="35" aria-valuemin="0" aria-valuemax="100">
+            <div class="progress-bar" style="width: 35%">35%</div>
+          </div>
+        </div>
+
+        <h5>Skills</h5>
+        <div class="skill-item">
+          <span>OOP</span>
+          <div class="progress" role="progressbar" aria-label="OOP skill" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100">
+            <div class="progress-bar" style="width: 30%">30%</div>
+          </div>
+        </div>
+        <div class="skill-item">
+          <span>DataBases</span>
+          <div class="progress" role="progressbar" aria-label="DataBases skill" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
+            <div class="progress-bar" style="width: 20%">20%</div>
+          </div>
+        </div>
+        
+        <h5 class="mt-4">Build Systems & Tools</h5>
+        <div class="skill-item">
+          <span>Maven</span>
+          <div class="progress" role="progressbar" aria-label="Maven skill" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100">
+            <div class="progress-bar" style="width: 45%">45%</div>
+          </div>
+        </div> 
+        <div class="skill-item">
+          <span>Git</span>
+          <div class="progress" role="progressbar" aria-label="Git skill" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100">
+            <div class="progress-bar" style="width: 30%">30%</div>
+          </div>
+        </div>
+        
+      </div>
+    </div> 
+    
+    <div class="col-lg-6">
+        <div class="card p-4 section" id="projects" data-aos="fade-up">
+          <h4>Projects (Dự án cá nhân)</h4>
+          
+          <div class="project-item mb-3">
+            <h5 class="mb-1">Tìm đường đi robot</h5>
+            <p class="mb-1">
+              <strong>Công nghệ sử dụng:</strong> C++
+            </p>
+            <p class="mb-1">
+              Sử dụng ma trận để tìm đường đi ngắn nhất cho robot.
+            </p>
+            <a href="https://github.com/Thang7749/Robot.git" target="_blank">Robot</a>
+          </div>
+          
+          <hr>
+
+          <div class="project-item">
+            <h5 class="mb-1">Koi-Pond-Construction-Ordering-System</h5>
+            <p class="mb-1">
+              <strong>Công nghệ sử dụng:</strong> Java, Web-application, MySQL
+            </p>
+            <p class="mb-1">
+              Trang web cung cấp xây các mẫu hồ cá, vật liệu xây hồ và trang trí.
+            </p>
+            <a href="https://github.com/Thang7749/Koi-Pond-Construction-Ordering-System.git" target="_blank">Koi-Pond-Construction-Ordering-System</a>
+          </div>
+          
+        </div>
+    </div> 
+    
+  </div> 
+  <div class="row mb-4">
+    <div class="col-12">
+      <div class="card p-4 section" data-aos="fade-up">
+        <h4>Hình ảnh khác</h4>
+        <p></p>
+        
+        <div class="row">
+          
+          <div class="col-12 col-md-4 text-center mb-3"> <img src="img/3.jpg" 
+                 alt="Mô tả cho ảnh 3" 
+                 class="img-fluid rounded"
+                 style="height: 250px; object-fit: cover; width: 100%;">
+          </div>
+
+          <div class="col-12 col-md-4 text-center mb-3"> <img src="img/4.jpg" 
+                 alt="Mô tả cho ảnh 4" 
+                 class="img-fluid rounded"
+                 style="height: 250px; object-fit: cover; width: 100%;">
+          </div>
+          
+          <div class="col-12 col-md-4 text-center mb-3"> <img src="img/5.jpg" 
+                 alt="Mô tả cho ảnh 5" 
+                 class="img-fluid rounded"
+                 style="height: 250px; object-fit: cover; width: 100%;">
+          </div>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mb-4">
+    <div class="col-12">
+      <div class="card p-5 section" id="certs" style="animation-delay: 0.8s;" data-aos="fade-up">
+        <h4>Certificates & Awards</h4>
+        <p>Chưa có</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mb-4">
+  <div class="col-12">
+    <div class="card p-4 p-md-5 section" id="contact" data-aos="fade-up">
+      <h4 class="text-center">Liên hệ</h4>
+      <p class="text-center text-white-50 mb-4">Bạn có câu hỏi hoặc muốn hợp tác? Gửi tin nhắn cho tôi!</p>
+      
+      <form action="YOUR_FORM_ACTION_URL" method="POST">
+        <div class="mb-3">
+          <input type="text" class="form-control" name="name" placeholder="Họ và tên" required>
+        </div>
+        <div class="mb-3">
+          <input type="email" class="form-control" name="email" placeholder="Email của bạn" required>
+        </div>
+        <div class="mb-3">
+          <textarea class="form-control" name="message" rows="5" placeholder="Nội dung tin nhắn..." required></textarea>
+        </div>
+        <div class="text-center mt-4">
+          <button type="submit" class="btn btn-submit">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-send-fill" viewBox="0 0 16 16">
+              <path d="M15.964.686a.5.5 0 0 0-.65-.65L.767 5.855H.766l-.452.18a.5.5 0 0 0-.082.887l.41.26.001.002 4.995 3.178 3.178 4.995.002.001.26.41a.5.5 0 0 0 .886-.083l6-15Zm-1.833 1.89L6.637 10.07l-.215-.338a.5.5 0 0 0-.154-.154l-.338-.215 7.494-7.494 1.178-.471-.47 1.178Z"/>
+            </svg>
+            Gửi tin nhắn
+          </button>
+        </div>
+      </form>
+      
     </div>
   </div>
 </div>
 
-    <div class="row" style="margin-top:18px">
-      <div class="col-md-8">
-        <section class="section">
-          <h4>Giới thiệu</h4>
-          <p>Mình là Thắng, làm backend, chuyên môn code về game</p>
-        </section>
-	
-        <section class="section">
-          <h4>Dự án</h4>
-          <div class="card" style="padding:12px; margin-bottom:8px">
-            <strong>Project</strong>
-            <p style="margin:0;color:var(--muted)"> Ứng dụng giao đồ ăn cho doanh nghiệp mới.</p>
-          </div>
+  <footer class="site-footer" id="contact" data-aos="fade-up">
+    <p>© 2025 Nguyễn Quốc Thắng</p>
+  </footer>
 
-        </section>
-
-        <section class="section">
-          <h4>Chứng chỉ & Giải thưởng</h4>
-          <p>Chưa có</p>
-        </section>
-        <section class="section">
-          <h4>Thông tin cá nhân</h4>
-          <p><strong>Học vụ:</strong> Đại học Giao Thông Vận Tải TP.HCM</p>
-          <p><strong>Địa chỉ:</strong> TP. Hồ Chí Minh</p>
-          <p><strong>Email:</strong> thangnq5089ut.edu.vn</p>
-		  <div class="profile-photo">
-		<h4>Ảnh cá nhân</h4>
-    <img id="avatar" src="img/1.jpg" class="avatar" alt="thang">
-	<img id="avatar" src="img/2.jpg" class="avatar" alt="thang">
-	<img id="avatar" src="img/3.jpg" class="avatar" alt="thang">
-	<img id="avatar" src="img/4.jpg" class="avatar" alt="thang">
-	</div>
-        </section>
-		
-
-        <section class="section">
-          <h4>Kỹ năng</h4>
-          <div class="skills">
-            <div class="skill">HTML</div>
-            <div class="skill">CSS</div>
-            <div class="skill">JavaScript</div>
-            <div class="skill">Git</div>
-          </div>
-        </section>
-
-        <section class="section">
-          <h4>Sở thích</h4>
-          <p style="color:var(--muted)">Game, Học thuật, Du lịch</p>
-        </section>
-
-        <section class="section contact">
-          <h4>Liên hệ</h4>
-          <p class="mb-1">GitHub: <a href="https://github.com/Thang7749">#Thang7749</a></p>
-          <p class="mb-1">Facebook: <a href="https://www.facebook.com/share/1BoyPoMV5h/">#Nguyễn Quốc Thắng</a></p>
-        </section>
-	  </div>
-    </div>
-  </div>
-</main>
-<footer class="site-footer">
-      <p><font dir="auto" style="vertical-align: inherit;"><font dir="auto" style="vertical-align: inherit;">© 2025 Nguyễn Quốc Thắng — Được xây dựng bằng HTML/CSS/JS</font></font></p>
-    </footer>
-
+</main> 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+
+<script>
+  AOS.init({
+    once: false
+  });
+</script>
+
 </body>
 </html>
